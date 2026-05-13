@@ -8,11 +8,11 @@
 - [x] Åbn projektet i VSCode
 - [x] Opret `docs/` mappe og læg `opgave_oversigt.md`, `opgave_beskrivelse.md` og `arbejdsplan.md` ind
 - [x] Tjek at projektet kører (kør main-metoden)
-- [ ] Opret GitHub repository
-- [ ] Push initial commit
-- [ ] Opsæt `application.properties` med H2
-- [ ] Test at H2 console virker (http://localhost:8080/h2-console)
-- [ ] Opret folder-struktur: `model`, `repository`, `service`, `controller`, `dto`, `config`
+- [x] Opret GitHub repository
+- [x] Push initial commit
+- [x] Opsæt `application.properties` med H2
+- [x] Test at H2 console virker (http://localhost:8080/h2-console)
+- [x] Opret folder-struktur: `model`, `repository`, `service`, `controller`, `dto`, `config`
 
 
 ## FASE 1: Komponenter
@@ -20,16 +20,16 @@
 **Mål:** Få EN feature til at virke hele vejen igennem først. Det giver et komplet eksempel at bygge resten over.
  
 ### Backend
-- [ ] Opret `Supplier` entity (id, navn, adresse)
-- [ ] Opret `Component` entity (id, internt nummer, eksternt varenummer, supplier-reference, udgået-boolean)
-- [ ] Opret `SupplierRepository`
-- [ ] Opret `ComponentRepository`
-- [ ] Opret `ComponentController` med endpoints:
+- [x] Opret `Supplier` entity (id, navn, adresse)
+- [x] Opret `Component` entity (id, internt nummer, eksternt varenummer, supplier-reference, udgået-boolean)
+- [x] Opret `SupplierRepository`
+- [x] Opret `ComponentRepository`
+- [x] Opret `ComponentController` med endpoints:
     - `GET /components` (liste alle)
     - `POST /components` (tilføj ny)
     - `PUT /components/{id}/udgaaet` (marker udgået)
-- [ ] Test endpoints i Postman
-- [ ] **COMMIT + PUSH**
+- [x] Test endpoints i Postman
+- [x] **COMMIT + PUSH**
 
 ### Frontend
 - [ ] Opret `index.html` eller `components.html` i `static/`
