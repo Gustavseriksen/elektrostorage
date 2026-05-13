@@ -107,24 +107,24 @@ Nu hvor du har en feature der virker, byg resten af entiteterne.
 ## FASE 6: Styklister/Assemblies
  
 ### Backend
-- [ ] `AssemblyController` med endpoints:
+- [x] `AssemblyController` med endpoints:
     - `GET /assemblies` (liste styklister)
     - `GET /assemblies/{id}` (en stykliste med komponenter)
-- [ ] Test i Postman
+- [x] Test i Postman
 
 ### Frontend
-- [ ] `assemblies.html`: liste styklister med komponenter og antal
-- [ ] **COMMIT + PUSH**
+- [x] `assemblies.html`: liste styklister med komponenter og antal
+- [x] **COMMIT + PUSH**
 
  
 ## FASE 7: JUnit tests
  
-- [ ] Test `ComponentController` (mindst GET og POST)
-- [ ] Test `OrderController` (især logik om sendt-status)
-- [ ] Test `InventoryController`
-- [ ] Test `AssemblyController`
-- [ ] Kør alle tests og tjek de er grønne
-- [ ] **COMMIT + PUSH**
+- [x] Test `ComponentController` (mindst GET og POST)
+- [x] Test `OrderController` (især logik om sendt-status)
+- [x] Test `InventoryController`
+- [x] Test `AssemblyController`
+- [x] Kør alle tests og tjek de er grønne
+- [x] **COMMIT + PUSH**
 
  
 ## FASE 8: Polering og aflevering
