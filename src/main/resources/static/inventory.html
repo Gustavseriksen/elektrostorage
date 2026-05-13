@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventar</title>
+</head>
+<body>
+    <h1>Lager</h1>
+
+    <ul id="inventory-list"></ul>
+
+    <h2>Indsend optælling</h2>
+    <form id="count-form">
+        <select id="component-select"></select>
+        <input type="number" id="antal" placeholder="Antal talt" min="0" required>
+        <input type="text" id="hvem" placeholder="Dit navn" required>
+        <button type="submit">Indsend</button>
+    </form>
+
+    <script src="inventory.js"></script>
+</body>
+</html>

@@ -93,15 +93,15 @@ Nu hvor du har en feature der virker, byg resten af entiteterne.
 ## FASE 5: Inventar
  
 ### Backend
-- [ ] `InventoryController` med endpoints:
+- [x] `InventoryController` med endpoints:
     - `GET /inventory` (komponenter modtaget via bestillinger)
     - `POST /inventory/count` (indsend en optælling)
-- [ ] Test i Postman
+- [x] Test i Postman
 
 ### Frontend
-- [ ] `inventory.html`: liste over modtagne komponenter
-- [ ] Evt. formular til at indsende optælling
-- [ ] **COMMIT + PUSH**
+- [x] `inventory.html`: liste over modtagne komponenter
+- [x] Evt. formular til at indsende optælling
+- [x] **COMMIT + PUSH**
 
  
 ## FASE 6: Styklister/Assemblies

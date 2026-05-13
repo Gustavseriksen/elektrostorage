@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface OrderLineRepository extends JpaRepository<OrderLine, Long> {
     List<OrderLine> findByOrderId(Long orderId);
+    List<OrderLine> findByOrderModtagetDatoIsNotNull();
 }
