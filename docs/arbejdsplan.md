@@ -58,15 +58,15 @@ Nu hvor du har en feature der virker, byg resten af entiteterne.
  
 ## FASE 3: DataSeeder med startdata
  
-- [ ] Opret `DataSeeder`-klasse (med `CommandLineRunner` eller `@PostConstruct`)
-- [ ] Indsæt 2-3 leverandører
-- [ ] Indsæt 10 komponenter (opdigtede navne)
-- [ ] Indsæt komponenter til "Lysende LED" (LED, modstand, batteriholder, 9V batteri)
-- [ ] Indsæt 1 aktiv bestilling (10 stk af 3 komponenter, ikke leveret)
-- [ ] Indsæt 1 færdig bestilling (100 stk af 1 komponent, gennemført)
-- [ ] Indsæt stykliste "Lysende LED" med de 4 komponenter
-- [ ] Test at data findes i H2 console
-- [ ] **COMMIT + PUSH**
+- [x] Opret `DataSeeder`-klasse (med `CommandLineRunner` eller `@PostConstruct`)
+- [x] Indsæt 2-3 leverandører
+- [x] Indsæt 10 komponenter (opdigtede navne)
+- [x] Indsæt komponenter til "Lysende LED" (LED, modstand, batteriholder, 9V batteri)
+- [x] Indsæt 1 aktiv bestilling (10 stk af 3 komponenter, ikke leveret)
+- [x] Indsæt 1 færdig bestilling (100 stk af 1 komponent, gennemført)
+- [x] Indsæt stykliste "Lysende LED" med de 4 komponenter
+- [x] Test at data findes i H2 console
+- [x] **COMMIT + PUSH**
 
  
 ## FASE 4: Orders
