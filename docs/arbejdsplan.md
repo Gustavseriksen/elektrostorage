@@ -32,14 +32,14 @@
 - [x] **COMMIT + PUSH**
 
 ### Frontend
-- [ ] Opret `index.html` eller `components.html` i `static/`
+- [x] Opret `index.html` eller `components.html` i `static/`
 - [ ] Lav simpel CSS (kan være meget basal)
 - [ ] Evt. lave simple styling med bootstrap
-- [ ] JavaScript: hent komponenter med `fetch()` og vis i liste
-- [ ] JavaScript: formular til at tilføje ny komponent
-- [ ] JavaScript: knap der markerer komponent som udgået med "Er du sikker?"-dialog (`confirm()`)
-- [ ] Test at det hele virker i browseren
-- [ ] **COMMIT + PUSH**
+- [x] JavaScript: hent komponenter med `fetch()` og vis i liste
+- [x] JavaScript: formular til at tilføje ny komponent
+- [x] JavaScript: knap der markerer komponent som udgået med "Er du sikker?"-dialog (`confirm()`)
+- [x] Test at det hele virker i browseren
+- [x] **COMMIT + PUSH**
 
  
 ## FASE 2: Resten af datamodellen
