@@ -46,14 +46,14 @@
  
 Nu hvor du har en feature der virker, byg resten af entiteterne.
  
-- [ ] Opret `Order` entity (med supplier, tracking-kode, sendt-dato, forventet leveringsdato, modtaget-dato)
-- [ ] Opret `OrderLine` entity (order, component, antal)
-- [ ] Opret `Assembly` entity (resulterer i en component)
-- [ ] Opret `AssemblyLine` entity (assembly, component, antal)
-- [ ] Opret `InventoryCount` entity (component, antal, hvem, dato)
-- [ ] Opret repositories for alle entiteter
-- [ ] Tjek at databasen oprettes korrekt (kig i H2 console)
-- [ ] **COMMIT + PUSH**
+- [x] Opret `Order` entity (med supplier, tracking-kode, sendt-dato, forventet leveringsdato, modtaget-dato)
+- [x] Opret `OrderLine` entity (order, component, antal)
+- [x] Opret `Assembly` entity (resulterer i en component)
+- [x] Opret `AssemblyLine` entity (assembly, component, antal)
+- [x] Opret `InventoryCount` entity (component, antal, hvem, dato)
+- [x] Opret repositories for alle entiteter
+- [x] Tjek at databasen oprettes korrekt (kig i H2 console)
+- [x] **COMMIT + PUSH**
 
  
 ## FASE 3: DataSeeder med startdata
