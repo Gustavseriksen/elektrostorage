@@ -72,23 +72,22 @@ Nu hvor du har en feature der virker, byg resten af entiteterne.
 ## FASE 4: Orders
  
 ### Backend
-- [ ] `OrderController` med endpoints:
+- [x] `OrderController` med endpoints:
     - `GET /orders` (liste alle, eller filter ikke-modtagne)
     - `GET /orders/{id}` (hent en)
     - `POST /orders` (opret ny tom bestilling)
     - `POST /orders/{id}/lines` (tilføj komponent til ordre)
     - `PUT /orders/{id}/send` (marker som sendt)
-- [ ] Logik: kan ikke tilføje til en sendt bestilling (returner 400 Bad Request)
-- [ ] Test i Postman
-- [ ] **COMMIT + PUSH**
+- [x] Logik: kan ikke tilføje til en sendt bestilling (returner 400 Bad Request)
+- [x] Test i Postman
 
 ### Frontend
-- [ ] `orders.html`: liste over ikke-modtagne ordrer
-- [ ] Klik på en ordre → gå til `order.html?id=X`
-- [ ] `order.html`: vis ordre + formular til at tilføje komponenter (kun hvis ikke sendt)
-- [ ] Knap til at markere ordre som sendt
-- [ ] Test i browseren
-- [ ] **COMMIT + PUSH**
+- [x] `orders.html`: liste over ikke-modtagne ordrer
+- [x] Klik på en ordre → gå til `order.html?id=X`
+- [x] `order.html`: vis ordre + formular til at tilføje komponenter (kun hvis ikke sendt)
+- [x] Knap til at markere ordre som sendt
+- [x] Test i browseren
+- [x] **COMMIT + PUSH**
 
  
 ## FASE 5: Inventar

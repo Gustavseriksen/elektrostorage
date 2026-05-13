@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestilling</title>
+</head>
+<body>
+    <h1 id="ordre-titel">Bestilling</h1>
+    <p id="ordre-info"></p>
+
+    <h2>Komponenter på denne bestilling</h2>
+    <ul id="line-list"></ul>
+
+    <div id="tilfoej-sektion">
+        <h2>Tilføj komponent</h2>
+        <select id="component-select"></select>
+        <input type="number" id="antal" placeholder="Antal" min="1" required>
+        <button onclick="addLine()">Tilføj</button>
+    </div>
+
+    <button id="send-knap" onclick="markerSendt()">Marker som sendt</button>
+
+    <script src="order.js"></script>
+</body>
+</html>
