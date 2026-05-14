@@ -1,6 +1,5 @@
 const apiUrl = "http://localhost:8080/inventory";
 
-// Henter og viser alle modtagne komponenter
 function loadInventory() {
     fetch(apiUrl)
         .then(res => res.json())
@@ -9,13 +8,13 @@ function loadInventory() {
             list.innerHTML = "";
             lines.forEach(l => {
                 const li = document.createElement("li");
+                li.className = "list-group-item";
                 li.textContent = `${l.component.internNummer} — ${l.component.eksterntVarenummer} — ${l.antal} stk (ordre #${l.order.id})`;
                 list.appendChild(li);
             });
         });
 }
 
-// Fylder dropdown med alle komponenter
 function loadComponents() {
     fetch("http://localhost:8080/components")
         .then(res => res.json())
@@ -30,7 +29,21 @@ function loadComponents() {
         });
 }
 
-// Sender en manuel optælling til backend
+function loadCounts() {
+    fetch(`${apiUrl}/counts`)
+        .then(res => res.json())
+        .then(counts => {
+            const list = document.getElementById("counts-list");
+            list.innerHTML = "";
+            counts.forEach(c => {
+                const li = document.createElement("li");
+                li.className = "list-group-item";
+                li.textContent = `${c.dato} — ${c.component.internNummer}: ${c.antal} stk (talt af ${c.hvem})`;
+                list.appendChild(li);
+            });
+        });
+}
+
 document.getElementById("count-form").addEventListener("submit", e => {
     e.preventDefault();
     const body = {
@@ -44,9 +57,11 @@ document.getElementById("count-form").addEventListener("submit", e => {
         body: JSON.stringify(body)
     }).then(() => {
         document.getElementById("count-form").reset();
+        loadCounts();
         alert("Optælling gemt!");
     });
 });
 
 loadInventory();
 loadComponents();
+loadCounts();

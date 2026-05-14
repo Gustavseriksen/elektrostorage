@@ -33,8 +33,6 @@
 
 ### Frontend
 - [x] Opret `index.html` eller `components.html` i `static/`
-- [ ] Lav simpel CSS (kan være meget basal)
-- [ ] Evt. lave simple styling med bootstrap
 - [x] JavaScript: hent komponenter med `fetch()` og vis i liste
 - [x] JavaScript: formular til at tilføje ny komponent
 - [x] JavaScript: knap der markerer komponent som udgået med "Er du sikker?"-dialog (`confirm()`)
@@ -129,10 +127,10 @@ Nu hvor du har en feature der virker, byg resten af entiteterne.
  
 ## FASE 8: Polering og aflevering
  
-- [ ] Lav en navigation/forside så man kan hoppe mellem siderne
-- [ ] Ryd op i kode, fjern udkommenteret/død kode
-- [ ] Tjek at alt stadig virker efter oprydning
-- [ ] Lav `README.md` med:
+- [x] Lav en navigation/forside så man kan hoppe mellem siderne
+- [x] Ryd op i kode, fjern udkommenteret/død kode
+- [x] Tjek at alt stadig virker efter oprydning
+- [x] Lav `README.md` med:
     - Kort projekt-beskrivelse
     - Hvordan man kører projektet
     - Hvilke endpoints der findes

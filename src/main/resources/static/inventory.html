@@ -3,19 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Inventar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Lager</h1>
+<body class="bg-light">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ElektroStorage</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="components.html">Komponenter</a></li>
+                <li class="nav-item"><a class="nav-link" href="orders.html">Bestillinger</a></li>
+                <li class="nav-item"><a class="nav-link" href="inventory.html">Inventar</a></li>
+                <li class="nav-item"><a class="nav-link" href="assemblies.html">Styklister</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <ul id="inventory-list"></ul>
+    <div class="container mt-4">
+        <h1>Lager</h1>
+        <ul id="inventory-list" class="list-group my-4"></ul>
 
-    <h2>Indsend optælling</h2>
-    <form id="count-form">
-        <select id="component-select"></select>
-        <input type="number" id="antal" placeholder="Antal talt" min="0" required>
-        <input type="text" id="hvem" placeholder="Dit navn" required>
-        <button type="submit">Indsend</button>
-    </form>
+        <div class="card">
+            <div class="card-body">
+                <h2 class="h5">Indsend optælling</h2>
+                <form id="count-form" class="row g-2">
+                    <div class="col-md-4"><select id="component-select" class="form-select"></select></div>
+                    <div class="col-md-2"><input type="number" id="antal" class="form-control" placeholder="Antal talt" min="0" required></div>
+                    <div class="col-md-3"><input type="text" id="hvem" class="form-control" placeholder="Dit navn" required></div>
+                    <div class="col-md-3"><button type="submit" class="btn btn-primary w-100">Indsend</button></div>
+                </form>
+            </div>
+        </div>
+
+        <h2 class="h4 mt-5">Indsendte optællinger</h2>
+        <ul id="counts-list" class="list-group my-3"></ul>
+    </div>
 
     <script src="inventory.js"></script>
 </body>

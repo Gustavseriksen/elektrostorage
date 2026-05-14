@@ -37,20 +37,23 @@ public class DataSeeder implements CommandLineRunner {
         Supplier mouser = supplierRepository.save(new Supplier(null, "Nordel Komponenter", "Industrivej 45, 2300 København S"));
         Supplier rs = supplierRepository.save(new Supplier(null, "DanEl Supply", "Erhvervsvej 8, 8000 Aarhus C"));
 
-        // Komponenter
-        Component led = componentRepository.save(new Component(null, "EL-001", "FAR-LED5MM", false, farnell));
-        Component modstand = componentRepository.save(new Component(null, "EL-002", "FAR-RES220", false, farnell));
-        Component batteriholder = componentRepository.save(new Component(null, "EL-003", "MOU-BH9V", false, mouser));
-        Component batteri9v = componentRepository.save(new Component(null, "EL-004", "RS-9VBAT", false, rs));
-        componentRepository.save(new Component(null, "EL-005", "FAR-CAP100", false, farnell));
-        componentRepository.save(new Component(null, "EL-006", "MOU-NPN2N", false, mouser));
-        componentRepository.save(new Component(null, "EL-007", "FAR-DIODE", false, farnell));
-        componentRepository.save(new Component(null, "EL-008", "RS-RELAY5V", false, rs));
-        componentRepository.save(new Component(null, "EL-009", "MOU-SWITCH", false, mouser));
-        componentRepository.save(new Component(null, "EL-010", "FAR-FUSE1A", false, farnell));
+        // Komponenter (internNummer er et tal jf. opgavebeskrivelsen)
+        Component led = componentRepository.save(new Component(null, 1, "FAR-LED5MM", false, false, farnell));
+        Component modstand = componentRepository.save(new Component(null, 2, "FAR-RES220", false, false, farnell));
+        Component batteriholder = componentRepository.save(new Component(null, 3, "MOU-BH9V", false, false, mouser));
+        Component batteri9v = componentRepository.save(new Component(null, 4, "RS-9VBAT", false, false, rs));
+        componentRepository.save(new Component(null, 5, "FAR-CAP100", false, false, farnell));
+        componentRepository.save(new Component(null, 6, "MOU-NPN2N", false, false, mouser));
+        componentRepository.save(new Component(null, 7, "FAR-DIODE", false, false, farnell));
+        componentRepository.save(new Component(null, 8, "RS-RELAY5V", false, false, rs));
+        componentRepository.save(new Component(null, 9, "MOU-SWITCH", false, false, mouser));
+        componentRepository.save(new Component(null, 10, "FAR-FUSE1A", false, false, farnell));
 
-        // Aktiv bestilling (ikke leveret)
-        Order aktivOrdre = orderRepository.save(new Order(null, mouser, null, null, null, null));
+        // Lysende LED er en samlet komponent som ikke kan bestilles — kun samles via stykliste
+        Component lysendeLedKomp = componentRepository.save(new Component(null, 100, null, false, true, null));
+
+        // Aktiv bestilling: sendt afsted men endnu ikke modtaget
+        Order aktivOrdre = orderRepository.save(new Order(null, mouser, "TRACK-AKTIV", LocalDate.of(2025, 5, 10), LocalDate.of(2025, 5, 20), null));
         orderLineRepository.save(new OrderLine(null, aktivOrdre, led, 10));
         orderLineRepository.save(new OrderLine(null, aktivOrdre, modstand, 10));
         orderLineRepository.save(new OrderLine(null, aktivOrdre, batteriholder, 10));
@@ -59,8 +62,8 @@ public class DataSeeder implements CommandLineRunner {
         Order faerdigOrdre = orderRepository.save(new Order(null, farnell, "TRACK123", LocalDate.of(2025, 1, 10), LocalDate.of(2025, 1, 15), LocalDate.of(2025, 1, 15)));
         orderLineRepository.save(new OrderLine(null, faerdigOrdre, led, 100));
 
-        // Stykliste: Lysende LED
-        Assembly lysendeLed = assemblyRepository.save(new Assembly(null, "Lysende LED", led));
+        // Stykliste: Lysende LED → resulterer i den separate lysendeLedKomp komponent
+        Assembly lysendeLed = assemblyRepository.save(new Assembly(null, "Lysende LED", lysendeLedKomp));
         assemblyLineRepository.save(new AssemblyLine(null, lysendeLed, led, 1));
         assemblyLineRepository.save(new AssemblyLine(null, lysendeLed, modstand, 1));
         assemblyLineRepository.save(new AssemblyLine(null, lysendeLed, batteriholder, 1));

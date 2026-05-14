@@ -1,6 +1,5 @@
 const apiUrl = "http://localhost:8080/assemblies";
 
-// Henter alle styklister og deres komponenter
 function loadAssemblies() {
     fetch(apiUrl)
         .then(res => res.json())
@@ -10,22 +9,44 @@ function loadAssemblies() {
 
             // For hver stykliste hentes dens linjer i et separat kald
             assemblies.forEach(a => {
-                const div = document.createElement("div");
-                div.innerHTML = `<h2>${a.navn} → resulterer i ${a.resulteresI.internNummer}</h2>`;
+                const card = document.createElement("div");
+                card.className = "card mb-3";
+                card.innerHTML = `
+                    <div class="card-header">
+                        <strong>${a.navn}</strong>
+                        <div class="small text-muted">Producerer 1 stk. komponent #${a.resulteresI.internNummer}</div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <p class="mb-2">Du skal bruge følgende komponenter for at samle én:</p>
+                    </div>
+                `;
+
+                const ul = document.createElement("ul");
+                ul.className = "list-group list-group-flush";
 
                 fetch(`${apiUrl}/${a.id}/lines`)
                     .then(res => res.json())
                     .then(lines => {
-                        const ul = document.createElement("ul");
                         lines.forEach(l => {
                             const li = document.createElement("li");
-                            li.textContent = `${l.component.internNummer} — ${l.component.eksterntVarenummer} — ${l.antal} stk`;
+                            li.className = "list-group-item d-flex justify-content-between";
+
+                            const tekst = document.createElement("span");
+                            const ekstern = l.component.eksterntVarenummer ?? "(samles)";
+                            tekst.textContent = `#${l.component.internNummer} — ${ekstern}`;
+                            li.appendChild(tekst);
+
+                            const antal = document.createElement("span");
+                            antal.className = "badge bg-primary";
+                            antal.textContent = `${l.antal} stk`;
+                            li.appendChild(antal);
+
                             ul.appendChild(li);
                         });
-                        div.appendChild(ul);
                     });
 
-                container.appendChild(div);
+                card.appendChild(ul);
+                container.appendChild(card);
             });
         });
 }

@@ -13,9 +13,10 @@ public class Component {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // ID auto-increment styres af databasen
     private Long id;
 
-    private String internNummer;
+    private Integer internNummer;       // Altid et tal jf. opgavebeskrivelsen
     private String eksterntVarenummer;
-    private boolean udgaaet;
+    private Boolean udgaaet;
+    private Boolean skalSamles;         // True hvis komponenten kun fremstilles via en stykliste
 
     @ManyToOne                          // Mange komponenter → én leverandør
     @JoinColumn(name = "supplier_id")   // Kolonnenavn i databasen

@@ -2,24 +2,26 @@ const params = new URLSearchParams(window.location.search);
 const orderId = params.get("id");
 const apiUrl = "http://localhost:8080/orders";
 
-// Henter ordredetaljer og viser dem på siden
 function loadOrder() {
     fetch(`${apiUrl}/${orderId}`)
         .then(res => res.json())
         .then(order => {
             document.getElementById("ordre-titel").textContent = `Ordre #${order.id}`;
             document.getElementById("ordre-info").textContent =
-                `Leverandør: ${order.supplier.navn} | Sendt: ${order.sendtDato ?? "Ikke sendt endnu"}`;
+                `Leverandør: ${order.supplier.navn} | Sendt: ${order.sendtDato ?? "Ikke sendt endnu"} | Modtaget: ${order.modtagetDato ?? "Ikke modtaget"}`;
 
             // Skjul tilføj-formular og send-knap hvis ordren allerede er sendt
             if (order.sendtDato !== null) {
                 document.getElementById("tilfoej-sektion").style.display = "none";
                 document.getElementById("send-knap").style.display = "none";
             }
+            // Vis modtag-knap hvis ordren er sendt men endnu ikke modtaget
+            if (order.sendtDato !== null && order.modtagetDato === null) {
+                document.getElementById("modtag-knap").style.display = "inline-block";
+            }
         });
 }
 
-// Henter og viser alle linjer (komponenter) på ordren
 function loadLines() {
     fetch(`${apiUrl}/${orderId}/lines`)
         .then(res => res.json())
@@ -28,22 +30,25 @@ function loadLines() {
             list.innerHTML = "";
             lines.forEach(l => {
                 const li = document.createElement("li");
-                li.textContent = `${l.component.internNummer} — ${l.antal} stk`;
+                li.className = "list-group-item";
+                const ekstern = l.component.eksterntVarenummer ?? "(samles)";
+                li.textContent = `#${l.component.internNummer} — ${ekstern} — ${l.antal} stk`;
                 list.appendChild(li);
             });
         });
 }
 
-// Fylder dropdown med alle tilgængelige komponenter
 function loadComponents() {
     fetch("http://localhost:8080/components")
         .then(res => res.json())
         .then(components => {
             const select = document.getElementById("component-select");
             components.forEach(c => {
+                // Komponenter der kun skal samles skal ikke kunne bestilles
+                if (c.skalSamles) return;
                 const option = document.createElement("option");
                 option.value = c.id;
-                option.textContent = `${c.internNummer} — ${c.eksterntVarenummer}`;
+                option.textContent = `#${c.internNummer} — ${c.eksterntVarenummer ?? "(samles)"}`;
                 select.appendChild(option);
             });
         });
@@ -65,6 +70,13 @@ function markerSendt() {
                 // Genindlæs siden så formular og knap skjules
                 location.reload();
             });
+    }
+}
+
+function markerModtaget() {
+    if (confirm("Er du sikker på at du vil markere denne ordre som modtaget?")) {
+        fetch(`${apiUrl}/${orderId}/modtag`, { method: "PUT" })
+            .then(() => location.reload());
     }
 }
 

@@ -3,18 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Komponenter</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Komponenter</h1>
+<body class="bg-light">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">ElektroStorage</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="components.html">Komponenter</a></li>
+                <li class="nav-item"><a class="nav-link" href="orders.html">Bestillinger</a></li>
+                <li class="nav-item"><a class="nav-link" href="inventory.html">Inventar</a></li>
+                <li class="nav-item"><a class="nav-link" href="assemblies.html">Styklister</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <ul id="component-list"></ul>
+    <div class="container mt-4 mb-5">
+        <h1>Komponenter</h1>
 
-    <h2>Tilføj komponent</h2>
-    <form id="create-form">
-        <input type="text" id="internNummer" placeholder="Internt nummer" required>
-        <input type="text" id="eksterntVarenummer" placeholder="Eksternt varenummer" required>
-        <button type="submit">Tilføj</button>
-    </form>
+        <div id="component-list" class="my-4"></div>
+
+        <div class="card">
+            <div class="card-body">
+                <h2 class="h5">Tilføj komponent</h2>
+                <form id="create-form" class="row g-2">
+                    <div class="col-md-4"><input type="number" id="internNummer" class="form-control" placeholder="Internt nummer" min="1" step="1" required></div>
+                    <div class="col-md-4"><input type="text" id="eksterntVarenummer" class="form-control" placeholder="Eksternt varenummer" required></div>
+                    <div class="col-md-4"><button type="submit" class="btn btn-primary w-100">Tilføj</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script src="components.js"></script>
 </body>

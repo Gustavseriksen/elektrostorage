@@ -5,6 +5,7 @@ import kea.elektrostorage.model.OrderLine;
 import kea.elektrostorage.repository.ComponentRepository;
 import kea.elektrostorage.repository.OrderLineRepository;
 import kea.elektrostorage.repository.OrderRepository;
+import kea.elektrostorage.repository.SupplierRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +19,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderController {
 
-    // Spring injicerer automatisk disse tre repositories via konstruktøren (Lombok)
+    // Spring injicerer automatisk disse repositories via konstruktøren (Lombok)
     private final OrderRepository orderRepository;
     private final OrderLineRepository orderLineRepository;
     private final ComponentRepository componentRepository;
+    private final SupplierRepository supplierRepository;
 
     // GET /orders — returnerer kun ordrer der ikke er modtaget endnu
     @GetMapping
@@ -43,10 +45,22 @@ public class OrderController {
         return orderLineRepository.findByOrderId(id);
     }
 
-    // POST /orders — opretter en ny tom bestilling ud fra JSON i request body
+    // POST /orders — opretter en ny tom bestilling i status "under formulering"
     @PostMapping
-    public Order create(@RequestBody Order order) {
-        return orderRepository.save(order);
+    public ResponseEntity<?> create(@RequestBody Order order) {
+        if (order.getSupplier() == null || order.getSupplier().getId() == null) {
+            return ResponseEntity.badRequest().body("Leverandør mangler");
+        }
+        // Slå leverandøren op så vi gemmer en rigtig reference, ikke en halvtom stub
+        var supplier = supplierRepository.findById(order.getSupplier().getId());
+        if (supplier.isEmpty()) {
+            return ResponseEntity.badRequest().body("Leverandør findes ikke");
+        }
+        order.setSupplier(supplier.get());
+        // En ny bestilling starter altid som "under formulering"
+        order.setSendtDato(null);
+        order.setModtagetDato(null);
+        return ResponseEntity.ok(orderRepository.save(order));
     }
 
     // POST /orders/{id}/lines — tilføjer en komponent til en bestilling
@@ -73,12 +87,28 @@ public class OrderController {
 
     // PUT /orders/{id}/send — markerer en ordre som sendt ved at sætte dags dato
     @PutMapping("/{id}/send")
-    public ResponseEntity<Order> markerSendt(@PathVariable Long id) {
-        return orderRepository.findById(id)
-                .map(order -> {
-                    order.setSendtDato(LocalDate.now());
-                    return ResponseEntity.ok(orderRepository.save(order));
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> markerSendt(@PathVariable Long id) {
+        var order = orderRepository.findById(id);
+        if (order.isEmpty()) return ResponseEntity.notFound().build();
+        if (order.get().getSendtDato() != null) {
+            return ResponseEntity.badRequest().body("Bestillingen er allerede sendt");
+        }
+        order.get().setSendtDato(LocalDate.now());
+        return ResponseEntity.ok(orderRepository.save(order.get()));
+    }
+
+    // PUT /orders/{id}/modtag — markerer en sendt ordre som modtaget (sætter modtagetDato)
+    @PutMapping("/{id}/modtag")
+    public ResponseEntity<?> markerModtaget(@PathVariable Long id) {
+        var order = orderRepository.findById(id);
+        if (order.isEmpty()) return ResponseEntity.notFound().build();
+        if (order.get().getSendtDato() == null) {
+            return ResponseEntity.badRequest().body("Bestillingen er ikke sendt endnu");
+        }
+        if (order.get().getModtagetDato() != null) {
+            return ResponseEntity.badRequest().body("Bestillingen er allerede modtaget");
+        }
+        order.get().setModtagetDato(LocalDate.now());
+        return ResponseEntity.ok(orderRepository.save(order.get()));
     }
 }

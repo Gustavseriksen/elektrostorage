@@ -37,7 +37,7 @@ class ComponentControllerTest {
     @Test
     void createComponent_returnerer200OgData() throws Exception {
         String json = """
-                {"internNummer": "TEST-001", "eksterntVarenummer": "EXT-TEST", "udgaaet": false}
+                {"internNummer": 999, "eksterntVarenummer": "EXT-TEST", "udgaaet": false, "skalSamles": false}
                 """;
 
         var request = HttpRequest.newBuilder()
@@ -48,6 +48,6 @@ class ComponentControllerTest {
 
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         assertEquals(200, response.statusCode());
-        assertTrue(response.body().contains("TEST-001"));
+        assertTrue(response.body().contains("999"));
     }
 }
